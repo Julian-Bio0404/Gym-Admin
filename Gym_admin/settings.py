@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     # LOCAL_APPS
     'users',
+    'bookings',
 ]
 
 THIRD_PARTY_APPS = [
