@@ -51,9 +51,31 @@ class User(GymModel, AbstractUser):
         )
     )
 
+    CEDULA = 'CC'
+    ID_CARD = 'TI'
+    types_identification = [(CEDULA, 'cedula'), (ID_CARD, 'id_card')]
+
+    type_identification = models.CharField(
+        max_length=2,
+        choices=types_identification,
+        null=False, 
+        help_text='type of user identification document: CC or TI.'
+    )
+
+    identification_regex = RegexValidator(
+        regex=r"\d{6,10}$",
+        message='Identification number must be entered in the format: 199999999. Up to 11 digits allowed'
+    )
+
+    identification_number = models.CharField(
+        validators=[identification_regex],
+        max_length=11, 
+        blank=False
+    )
+
     # Username configuration
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'type_identification', 'identification_number']
     
     def __str__(self):
         """Return username."""

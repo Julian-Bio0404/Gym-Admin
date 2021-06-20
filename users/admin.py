@@ -15,6 +15,7 @@ class CustomUserAdmin(UserAdmin):
     list_display = (
         'email', 'username', 
         'first_name', 'last_name',
+        'type_identification', 'identification_number',
         'rol'
     )
 
@@ -28,7 +29,7 @@ class ProfileAdmin(admin.ModelAdmin):
     """Profile model admin."""
 
     list_display = (
-        'user', 'is_active', 
+        'user', 'is_active', 'age',
         'weight', 'height'
     )
 
@@ -37,7 +38,7 @@ class ProfileAdmin(admin.ModelAdmin):
         'user__first_name', 'user__last_name'
     )
 
-    list_filter = ('is_active',)
+    list_filter = ('is_active', 'age')
 
 
 @admin.register(Membership)

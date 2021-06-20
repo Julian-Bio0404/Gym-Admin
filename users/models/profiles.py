@@ -21,6 +21,8 @@ class Profile(GymModel):
         null=True
     )
 
+    age = models.PositiveSmallIntegerField(null=True, blank=True)
+
     weight = models.PositiveIntegerField(
         'user weight',
         default=0,
