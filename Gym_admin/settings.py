@@ -48,7 +48,8 @@ INSTALLED_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
-    "django_filters"
+    "django_filters",
+    "anymail",
 ]
 
 INSTALLED_APPS += THIRD_PARTY_APPS 
@@ -150,3 +151,14 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 3,
 }
+
+# Anymail
+ANYMAIL = {
+    "MAILGUN_API_KEY": "<your Mailgun key>",
+    "MAILGUN_SENDER_DOMAIN": 'mg.example.com',  
+}
+
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"  
+DEFAULT_FROM_EMAIL = "you@example.com"  
+SERVER_EMAIL = "your-server@example.com"  
+
