@@ -11,7 +11,6 @@ from utils.models import GymModel
 
 class User(GymModel, AbstractUser):
     """User model.
-
     Extend from Django's Abstract User and add some extra fields."""
 
     email = models.EmailField(
@@ -45,7 +44,7 @@ class User(GymModel, AbstractUser):
 
     is_verified = models.BooleanField(
         'verified',
-        default=True,
+        default=False,
         help_text=(
             'Set to true when the user have verified its email add'
         )

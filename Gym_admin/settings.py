@@ -9,8 +9,8 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -49,7 +49,6 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "django_filters",
-    "anymail",
 ]
 
 INSTALLED_APPS += THIRD_PARTY_APPS 
@@ -69,7 +68,7 @@ ROOT_URLCONF = 'Gym_admin.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,6 +138,8 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Email
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Django REST Framework
 REST_FRAMEWORK = {
@@ -151,14 +152,4 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 3,
 }
-
-# Anymail
-ANYMAIL = {
-    "MAILGUN_API_KEY": "<your Mailgun key>",
-    "MAILGUN_SENDER_DOMAIN": 'mg.example.com',  
-}
-
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"  
-DEFAULT_FROM_EMAIL = "you@example.com"  
-SERVER_EMAIL = "your-server@example.com"  
 

@@ -10,8 +10,8 @@ from django.utils import timezone
 
 # Django REST Framework
 from rest_framework import serializers
-from rest_framework.validators import UniqueValidator
 from rest_framework.authtoken.models import Token
+from rest_framework.validators import UniqueValidator
 
 # Serializers
 from users.serializers.profiles import ProfileModelSerializer
@@ -20,8 +20,8 @@ from users.serializers.profiles import ProfileModelSerializer
 from users.models import User, Profile
 
 # Utilities
-import jwt
 from datetime import timedelta
+import jwt
 
 
 class UserModelSerializer(serializers.ModelSerializer):
@@ -43,16 +43,9 @@ class UserModelSerializer(serializers.ModelSerializer):
             'profile'
         )
 
-# Type identification validator
-def validate_type_identification(type_identification):
-    """Verify type identification document."""
-    if type_identification != 'CC' or type_identification != 'TI':
-        raise serializers.ValidationError('type of identification not allowed.')
-
 
 class UserSignUpSerializer(serializers.Serializer):
     """User signup serializer.
-
     Handle sign up data validation and user/profile creation."""
 
     email = serializers.EmailField(
@@ -73,7 +66,7 @@ class UserSignUpSerializer(serializers.Serializer):
     phone_number = serializers.CharField(validators=[phone_regex])
 
     # Identification document
-    type_identification = serializers.CharField(validators=[validate_type_identification])
+    type_identification = serializers.CharField(max_length=64)
     identification_regex = RegexValidator(
         regex=r"\d{6,10}$",
         message='Identification number must be entered in the format: 199999999. Up to 11 digits allowed'
@@ -89,10 +82,16 @@ class UserSignUpSerializer(serializers.Serializer):
     last_name = serializers.CharField(min_length=2, max_length=30)
 
     def validate(self, data):
-        """Verify password match."""
+        """Verify password match and type identification."""
+
+        # Identification
+        type_identification = data['type_identification']
+        if type_identification not in ['CC', 'TI']:
+            raise serializers.ValidationError('type of identification not allowed.')
+
+        # Password
         passwd = data['password']
         passwd_conf = data['password_confirmation']
-
         if passwd != passwd_conf:
             raise serializers.ValidationError('Password don´t match')
         password_validation.validate_password(passwd)
@@ -108,9 +107,10 @@ class UserSignUpSerializer(serializers.Serializer):
 
     def send_confirmation_email(self, user):
         """Send account verification link to given user."""
+        
         verification_token = self.gen_verification_token(user)
         subject = 'Welcome @{}! Verify your account'.format(user.username)
-        from_email = 'Gym Admin <noreply@gymadmin.com>'
+        from_email = 'Gym Admin <frameworkdjango7@gmail.com>'
         content = render_to_string(
             'users/account_verification.html',
             {'token': verification_token, 'user': user}
@@ -119,7 +119,7 @@ class UserSignUpSerializer(serializers.Serializer):
         msg.attach_alternative(content, 'text/html')
         msg.send()
 
-    def gen_verification_token(user):
+    def gen_verification_token(self, user):
         """Create JWT token that the user can use to verify its account."""
         exp_date = timezone.now() + timedelta(days=3)
         payload = {
@@ -129,12 +129,11 @@ class UserSignUpSerializer(serializers.Serializer):
         }
         # Generacion del token
         token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
-        return token.decode()
+        return token
 
 
 class UserLoginSerializer(serializers.Serializer):
     """User login serializer.
-
         handle the login request data."""
     
     email = serializers.EmailField()

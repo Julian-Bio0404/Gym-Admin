@@ -23,7 +23,7 @@ class Profile(GymModel):
 
     age = models.PositiveSmallIntegerField(null=True, blank=True)
 
-    weight = models.PositiveIntegerField(
+    weight = models.FloatField(
         'user weight',
         default=0,
         help_text='user weight in float.'

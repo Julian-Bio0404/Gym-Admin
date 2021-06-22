@@ -22,6 +22,4 @@ class ProfileModelSerializer(serializers.ModelSerializer):
             'is_active'
         )
 
-        read_only_fields = (
-            'is_active'
-        )
+        read_only_fields = ['is_active']
