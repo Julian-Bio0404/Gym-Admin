@@ -11,7 +11,8 @@ from users.serializers import (
     AccountVerificationSerializer,
     UserLoginSerializer, 
     UserModelSerializer,
-    UserSignUpSerializer
+    UserSignUpSerializer,
+    MembershipModelSerializer
 )
 
 # Models
@@ -75,4 +76,19 @@ class UserViewSet(mixins.RetrieveModelMixin,
         serializer.save()
         data = UserModelSerializer(user).data
         return Response(data)
+    
+    @action(detail=True, methods=['post'])
+    def membership(self, request, *args, **kwargs):
+        """User membership."""
+        user = self.get_object()
+        profile = user.profile
+        request.data['user'] = user
+        request.data['profile'] = profile
+        serializer = MembershipModelSerializer(
+            data=request.data
+        )
+        serializer.is_valid(raise_exception=True)
+        membership = serializer.save()
+        data = membership
+        return Response(data, status=status.HTTP_201_CREATED)
         
