@@ -1,6 +1,7 @@
 """Users views."""
 
 # Django REST framework
+from users.models.memberships import Membership
 from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -12,7 +13,8 @@ from users.serializers import (
     UserLoginSerializer, 
     UserModelSerializer,
     UserSignUpSerializer,
-    MembershipModelSerializer
+    MembershipModelSerializer,
+    CreateMembershipSerializer
 )
 
 # Models
@@ -63,32 +65,37 @@ class UserViewSet(mixins.RetrieveModelMixin,
 
     @action(detail=True, methods=['put', 'patch'])
     def profile(self, request, *args, **kwargs):
-        """Upsdate profile data."""
+        """Update profile data."""
         user = self.get_object()
         profile = user.profile
         partial = request.method == 'PATCH'
-        serializer = ProfileModelSerializer(
-            profile,
-            data=request.data,
-            partial=partial
-        )
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        data = UserModelSerializer(user).data
-        return Response(data)
+        try:
+            membership = Membership.objects.get(profile=profile)
+            if membership:
+                profile.is_active = True
+                serializer = ProfileModelSerializer(
+                    profile,
+                    data=request.data,
+                    partial=partial
+                )
+                serializer.is_valid(raise_exception=True)
+                serializer.save()
+                data = UserModelSerializer(user).data
+                return Response(data)
+        except:
+            profile.is_active = False
+            data = UserModelSerializer(user).data
+            return Response(data)
     
     @action(detail=True, methods=['post'])
     def membership(self, request, *args, **kwargs):
         """User membership."""
-        user = self.get_object()
-        profile = user.profile
-        request.data['user'] = user
-        request.data['profile'] = profile
-        serializer = MembershipModelSerializer(
+        serializer = CreateMembershipSerializer(
             data=request.data
         )
         serializer.is_valid(raise_exception=True)
         membership = serializer.save()
-        data = membership
+        data = MembershipModelSerializer(membership).data
+        data.pop('profile')
         return Response(data, status=status.HTTP_201_CREATED)
         

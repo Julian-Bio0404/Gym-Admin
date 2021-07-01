@@ -4,7 +4,7 @@
 from rest_framework import serializers
 
 # Models
-from users.models import Profile
+from users.models import Profile, Membership
 
 
 class ProfileModelSerializer(serializers.ModelSerializer):
@@ -21,5 +21,3 @@ class ProfileModelSerializer(serializers.ModelSerializer):
             'height',
             'is_active'
         )
-
-        read_only_fields = ['is_active']

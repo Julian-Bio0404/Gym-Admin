@@ -46,6 +46,7 @@ class MembershipAdmin(admin.ModelAdmin):
     """Membership model admin."""
 
     list_display = (
-        'user', 'available_days', 
+        'user', 'profile', 
+        'available_days', 
         'category'
     )
