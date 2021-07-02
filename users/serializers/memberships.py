@@ -1,14 +1,13 @@
-"""Membership serializer."""
+"""Memberships serializer."""
 
 # Django
 from django.core.validators import RegexValidator
-from django.shortcuts import get_object_or_404
 
 # Django REST Framework
 from rest_framework import serializers
 
 # Models
-from users.models import Membership, User, profiles
+from users.models import Membership, User
 
 # Serializers
 from users.serializers import UserModelSerializer, ProfileModelSerializer
