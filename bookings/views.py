@@ -1,11 +1,9 @@
 """Bookings views."""
 
 # Django REST Framework
-from django.db.models.query import QuerySet
 from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from users import serializers
 
 # Serializers
 from bookings.serializers import (
@@ -14,7 +12,6 @@ from bookings.serializers import (
 )
 
 # Models
-from users.models import User
 from bookings.models import TrainingReserve
 
 class TrainingReserveViewSet(mixins.ListModelMixin,
@@ -30,7 +27,7 @@ class TrainingReserveViewSet(mixins.ListModelMixin,
     def reserve(self, request):
         """Training reserve."""
         serializer = CreateTrainingReserveSerializer(data=request.data)
-        serializers.is_valid(raise_exception=True)
+        serializer.is_valid(raise_exception=True)
         reserve = serializer.save()
         data = TrainingReserveModelSerializer(reserve).data
         return Response(data, status=status.HTTP_201_CREATED)
@@ -41,4 +38,3 @@ class TrainingReserveViewSet(mixins.ListModelMixin,
         serializer = TrainingReserveModelSerializer(self.queryset, many=True)
         data = serializer.data
         return Response(data, status=status.HTTP_200_OK)
-
