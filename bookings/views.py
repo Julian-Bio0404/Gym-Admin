@@ -8,11 +8,14 @@ from rest_framework.response import Response
 # Serializers
 from bookings.serializers import (
     TrainingReserveModelSerializer, 
-    CreateTrainingReserveSerializer
+    CreateTrainingReserveSerializer,
+    AppointmentModelSerializer,
+    CreateAppointmentSerializer
 )
 
 # Models
-from bookings.models import TrainingReserve
+from bookings.models import TrainingReserve, Appointment
+
 
 class TrainingReserveViewSet(mixins.ListModelMixin,
                             mixins.RetrieveModelMixin,
@@ -36,5 +39,32 @@ class TrainingReserveViewSet(mixins.ListModelMixin,
     def list_reserves(self, request):
         """List all the training reserves."""
         serializer = TrainingReserveModelSerializer(self.queryset, many=True)
+        data = serializer.data
+        return Response(data, status=status.HTTP_200_OK)
+
+
+class AppointmentViewSet(mixins.ListModelMixin,
+                            mixins.RetrieveModelMixin,
+                            mixins.UpdateModelMixin,
+                            viewsets.GenericViewSet):
+    """Appointment view set."""
+
+    queryset = Appointment.objects.all()
+    serializers_class = TrainingReserveModelSerializer
+    lookup_field = 'physio'
+
+    @action(detail=False, methods=['post'])
+    def reserve_appointment(self, request):
+        """Appointment reserve."""
+        serializer = CreateAppointmentSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        reserve_appointment = serializer.save()
+        data = AppointmentModelSerializer(reserve_appointment).data
+        return Response(data, status=status.HTTP_201_CREATED)
+
+    @action(detail=True, methods=['get'])
+    def list_appointments(self, request):
+        """List all the appointments."""
+        serializer = AppointmentModelSerializer(self.queryset, many=True)
         data = serializer.data
         return Response(data, status=status.HTTP_200_OK)
