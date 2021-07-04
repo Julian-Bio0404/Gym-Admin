@@ -2,7 +2,7 @@
 
 # Django
 from django.conf import settings
-from django.contrib.auth import password_validation, authenticate
+from django.contrib.auth import authenticate, password_validation
 from django.core.mail import EmailMultiAlternatives
 from django.core.validators import RegexValidator
 from django.template.loader import render_to_string
@@ -65,8 +65,14 @@ class UserSignUpSerializer(serializers.Serializer):
     )
     phone_number = serializers.CharField(validators=[phone_regex])
 
+    def rol_validator(rol):
+        if rol not in ['client', 'admin', 'trainer', 'physio']:
+            raise serializers.ValidationError('rol not allowed.')
+
+    rol = serializers.CharField(validators=[rol_validator])
+
     # Identification document
-    type_identification = serializers.CharField(max_length=64)
+    type_identification = serializers.CharField(max_length=2)
     identification_regex = RegexValidator(
         regex=r"\d{6,10}$",
         message='Identification number must be entered in the format: 199999999. Up to 11 digits allowed'
