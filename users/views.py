@@ -3,9 +3,12 @@
 # Django REST framework
 from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
-from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from users.models.memberships import Membership
+
+# Permissions
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from users.permissions import IsAccountOwner, IsAdminGym
 
 # Serializers
 from users.serializers import ProfileModelSerializer
@@ -28,7 +31,7 @@ class UserViewSet(mixins.RetrieveModelMixin,
     """User view set.
     Handle signup, login and account verification."""
     
-    queryset = User.objects.filter(is_active=True)
+    queryset = User.objects.all()
     serializer_class = UserModelSerializer
     lookup_field = 'username'
 
@@ -36,9 +39,13 @@ class UserViewSet(mixins.RetrieveModelMixin,
         """Assign permissions based on action."""
         if self.action in ['signup', 'login', 'verify']:
             permissions = [AllowAny]
-        elif self.action in ['profile', 'membership']:
+        elif self.action in ['update', 'partial_update', 'profile']:
+            permissions = [IsAuthenticated, IsAccountOwner]
+        elif self.action == 'membership':
+            permissions = [IsAuthenticated, IsAdminGym]
+        else:
             permissions = [IsAuthenticated]
-        return[p() for p in permissions]
+        return[permission() for permission in permissions]
 
     @action(detail=False, methods=['post'])
     def signup(self, request):
@@ -48,7 +55,6 @@ class UserViewSet(mixins.RetrieveModelMixin,
         user = serializer.save()
         data = UserModelSerializer(user).data
         return Response(data, status=status.HTTP_201_CREATED)
-
 
     @action(detail=False, methods=['post'])
     def login(self, request):

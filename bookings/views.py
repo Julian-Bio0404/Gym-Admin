@@ -3,8 +3,12 @@
 # Django REST Framework
 from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+
+# Permissions
+from rest_framework.permissions import IsAuthenticated
+from bookings.permissions import IsSameClient, IsPhysio
+from users.permissions import IsAdminGym
 
 # Serializers
 from bookings.serializers import (
@@ -26,8 +30,15 @@ class TrainingReserveViewSet(mixins.ListModelMixin,
 
     queryset = TrainingReserve.objects.all()
     serializer_class = TrainingReserveModelSerializer
-    permission_classes = (IsAuthenticated,)
     lookup_field = 'user__username'
+
+    def get_permissions(self):
+        """Assign permissions based on action."""
+        if self.action == 'reserve':
+            permissions = [IsAuthenticated, IsSameClient]
+        elif self.action == 'list':
+            permissions = [IsAuthenticated, IsAdminGym]
+        return[permission() for permission in permissions]
     
     @action(detail=False, methods=['post'])
     def reserve(self, request):
@@ -46,9 +57,16 @@ class AppointmentViewSet(mixins.ListModelMixin,
     """Appointment view set."""
 
     queryset = Appointment.objects.all()
-    serializer_class = TrainingReserveModelSerializer
-    permission_classes = (IsAuthenticated,)
+    serializer_class = AppointmentModelSerializer
     lookup_field = 'physio__username'
+
+    def get_permissions(self):
+        """Assign permissions based on action."""
+        if self.action == 'reserve_appointment':
+            permissions = [IsAuthenticated, IsSameClient]
+        elif self.action in ['list', 'retrieve']:
+            permissions = [IsAuthenticated, IsPhysio]
+        return[permission() for permission in permissions]
 
     @action(detail=False, methods=['post'])
     def reserve_appointment(self, request):
