@@ -2,6 +2,7 @@
 
 # Django
 from django.core.validators import RegexValidator
+from django.utils import timezone
 
 # Django REST Framework
 from rest_framework import serializers
@@ -58,11 +59,17 @@ class CreateAppointmentSerializer(serializers.Serializer):
         
         if profile.is_active == False:
             raise serializers.ValidationError('The user does not have an active membership.')
-        elif profile.is_active == True:
+        if data['date'] <= timezone.now():
+            raise serializers.ValidationError('Time not available.')
+        try:
+            appointment = Appointment.objects.get(user=user)
+            if appointment:
+                raise serializers.ValidationError('You already have an appointment.')
+        except Appointment.DoesNotExist:
             try:
-                appointment = Appointment.objects.get(user=user)
-                if appointment:
-                    raise serializers.ValidationError('You already have an appointment')
+                appointment_not_available = Appointment.objects.get(date=data['date'])
+                if appointment_not_available:
+                    raise serializers.ValidationError('Time is already busy.')
             except Appointment.DoesNotExist:
                 return data
 
