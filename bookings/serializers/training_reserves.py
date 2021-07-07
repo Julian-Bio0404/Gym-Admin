@@ -2,6 +2,7 @@
 
 # Django
 from django.core.validators import RegexValidator
+from django.utils import timezone
 
 # Django REST Framework
 from rest_framework import serializers
@@ -38,16 +39,28 @@ class CreateTrainingReserveSerializer(serializers.Serializer):
     date = serializers.DateTimeField()
 
     def validate(self, data):
-        """Verify that the user has an active membership """
+        """Verify that the user has an active membership,
+        and the reserve. """
         user = User.objects.get(
             identification_number=data['identification_number'],
             is_verified=True
         )
         profile = user.profile
-        if profile.is_active == False:
-            raise serializers.ValidationError('the user does not have an active membership.')
-        else:
-            return data
+        reserves = TrainingReserve.objects.filter(date=data['date']).count()
+
+        try:
+            user_reserve = TrainingReserve.objects.get(user=user)
+            if user_reserve:
+                raise serializers.ValidationError('You already have a reserve.')
+        except TrainingReserve.DoesNotExist:
+            if profile.is_active == False:
+                raise serializers.ValidationError('The user does not have an active membership.')
+            if data['date'] <= timezone.now():
+                raise serializers.ValidationError('Time not available')
+            if reserves == 26:
+                raise serializers.ValidationError('The capacity at this time is full.')
+            else:
+                return data
 
     def create(self, validated_data):
         """Create a training reserve."""
