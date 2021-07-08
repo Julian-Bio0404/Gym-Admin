@@ -186,3 +186,27 @@ class AccountVerificationSerializer(serializers.Serializer):
         user = User.objects.get(username=payload['user'])
         user.is_verified = True
         user.save()
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    """Change user's password serializer."""
+    
+    old_password = serializers.CharField(required=True, min_length=8, max_length=64)
+    password = serializers.CharField(required=True,min_length=8, max_length=64)
+    password_confirmation = serializers.CharField(required=True, min_length=8, max_length=64)
+
+    def validate(self, data):
+        """Check password."""
+        if not self.context['user'].check_password(data['old_password']):
+            raise serializers.ValidationError('Wrong password.')
+
+        if data['password_confirmation'] != data['password']:
+            raise serializers.ValidationError('Password don´t match')
+        password_validation.validate_password(data['password'])
+        return data
+    
+    def save(self):
+        """Update user's password."""
+        user = self.context['user']
+        user.set_password(self.validated_data['password'])
+        user.save()

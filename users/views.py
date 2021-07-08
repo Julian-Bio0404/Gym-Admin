@@ -18,7 +18,8 @@ from users.serializers import (
     UserModelSerializer,
     UserSignUpSerializer,
     MembershipModelSerializer,
-    CreateMembershipSerializer
+    CreateMembershipSerializer,
+    ChangePasswordSerializer
 )
 
 # Models
@@ -39,7 +40,7 @@ class UserViewSet(mixins.RetrieveModelMixin,
         """Assign permissions based on action."""
         if self.action in ['signup', 'login', 'verify']:
             permissions = [AllowAny]
-        elif self.action in ['update', 'partial_update', 'profile']:
+        elif self.action in ['update', 'partial_update', 'profile', 'change_password']:
             permissions = [IsAuthenticated, IsAccountOwner]
         elif self.action == 'membership':
             permissions = [IsAuthenticated, IsAdminGym]
@@ -78,6 +79,13 @@ class UserViewSet(mixins.RetrieveModelMixin,
             'message': 'Congratulation! Now choose a membership and start training with us.'
         }
         return Response(data, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['put'])
+    def change_password(self, request, *args, **kwargs):
+        serializer = ChangePasswordSerializer(data=request.data, context={'user': request.user})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     @action(detail=True, methods=['put', 'patch'])
     def profile(self, request, *args, **kwargs):
