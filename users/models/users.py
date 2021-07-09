@@ -33,12 +33,19 @@ class User(GymModel, AbstractUser):
         blank=True
     )
 
+    ADMIN = 'admin'
+    PHYSIO = 'physio'
+    TRAINER = 'trainer'
+    CLIENT = 'client'
+    roles = [(ADMIN, 'admin'), (PHYSIO, 'physio'), (TRAINER, 'trainer'), (CLIENT, 'client')]
+
     rol = models.CharField(
         'rol',
         max_length=7,
+        choices=roles,
         default='client',
         help_text=(
-            'Help easily distringuish users and perform queries. Clients are the main type of user.'
+            'Help easily distinguish users and perform queries. Clients are the main type of user.'
         )
     )
 
@@ -68,7 +75,8 @@ class User(GymModel, AbstractUser):
 
     identification_number = models.CharField(
         validators=[identification_regex],
-        max_length=11, 
+        max_length=11,
+        unique=True,
         blank=False
     )
 

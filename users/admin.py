@@ -15,7 +15,8 @@ class CustomUserAdmin(UserAdmin):
     list_display = (
         'email', 'username', 
         'first_name', 'last_name',
-        'type_identification', 'identification_number',
+        'type_identification', 
+        'identification_number',
         'rol', 'is_verified'
     )
 
@@ -46,7 +47,7 @@ class MembershipAdmin(admin.ModelAdmin):
     """Membership model admin."""
 
     list_display = (
-        'user', 'profile', 
+        'user', 
         'available_days', 
         'category'
     )

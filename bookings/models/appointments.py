@@ -10,11 +10,9 @@ from utils.models import GymModel
 class Appointment(GymModel):
     """"
     Appointment model.
-    
     An model of a physio appointment."""
 
     user = models.ForeignKey('users.User', on_delete=models.CASCADE)
-    profile = models.ForeignKey('users.Profile', on_delete=models.CASCADE)
     
     physio = models.ForeignKey(
         "users.User",

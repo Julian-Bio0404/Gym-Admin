@@ -9,7 +9,7 @@ class IsSelf(BasePermission):
      the same user who appears in the reservation."""
 
     def has_permission(self, request, view):
-        """Verify that user is admin."""
+        """Verify that user is self."""
         try:
             return request.user.identification_number ==  request.data['identification_number']
         except KeyError:

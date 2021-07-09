@@ -1,6 +1,7 @@
 """Users serializers."""
 
 # Django
+from enum import unique
 from django.conf import settings
 from django.contrib.auth import authenticate, password_validation
 from django.core.mail import EmailMultiAlternatives
@@ -30,6 +31,7 @@ class UserModelSerializer(serializers.ModelSerializer):
     profile = ProfileModelSerializer(read_only=True)
 
     class Meta:
+        """Meta class."""
         model = User
         fields = (
             'username',
@@ -42,6 +44,12 @@ class UserModelSerializer(serializers.ModelSerializer):
             'identification_number',
             'profile'
         )
+        read_only_fields = [
+            'rol',
+            'type_identification',
+            'identification_number',
+            'profile'
+        ]
 
 
 class UserSignUpSerializer(serializers.Serializer):
@@ -65,11 +73,13 @@ class UserSignUpSerializer(serializers.Serializer):
     )
     phone_number = serializers.CharField(validators=[phone_regex])
 
+    # Role
     def rol_validator(rol):
+        """Verify the rol."""
         if rol not in ['client', 'admin', 'trainer', 'physio']:
             raise serializers.ValidationError('rol not allowed.')
 
-    rol = serializers.CharField(validators=[rol_validator])
+    rol = serializers.CharField(validators=[rol_validator], default='client')
 
     # Identification document
     type_identification = serializers.CharField(max_length=2)
@@ -77,7 +87,10 @@ class UserSignUpSerializer(serializers.Serializer):
         regex=r"\d{6,10}$",
         message='Identification number must be entered in the format: 199999999. Up to 11 digits allowed'
     )
-    identification_number = serializers.CharField(validators=[identification_regex])
+    identification_number = serializers.CharField(validators=[
+        identification_regex, 
+        UniqueValidator(queryset=User.objects.all())]
+    )
 
     # Password
     password = serializers.CharField(min_length=8, max_length=64)
@@ -113,7 +126,6 @@ class UserSignUpSerializer(serializers.Serializer):
 
     def send_confirmation_email(self, user):
         """Send account verification link to given user."""
-        
         verification_token = self.gen_verification_token(user)
         subject = 'Welcome @{}! Verify your account'.format(user.username)
         from_email = 'Gym Admin <frameworkdjango7@gmail.com>'
@@ -179,7 +191,6 @@ class AccountVerificationSerializer(serializers.Serializer):
         self.context['payload'] = payload
         return data
 
-    # Sobreescribiendo save porque no hay que crear una nueva instancia
     def save(self):
         """Update user's verified status."""
         payload = self.context['payload']

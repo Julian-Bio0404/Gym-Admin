@@ -12,20 +12,19 @@ from users.models import User
 from bookings.models import TrainingReserve
 
 # Serializers
-from users.serializers import UserModelSerializer, ProfileModelSerializer
+from users.serializers import UserModelSerializer
 
 
 class TrainingReserveModelSerializer(serializers.ModelSerializer):
     """Appointment model serializer."""
 
     user = UserModelSerializer(read_only=True)
-    profile = ProfileModelSerializer(read_only=True)
 
     class Meta:
         """Meta class."""
         model = TrainingReserve
         fields = ('__all__')
-        read_only_fields = ['user', 'profile']
+        read_only_fields = ['user']
 
 
 class CreateTrainingReserveSerializer(serializers.Serializer):
@@ -57,6 +56,7 @@ class CreateTrainingReserveSerializer(serializers.Serializer):
                 raise serializers.ValidationError('The user does not have an active membership.')
             if data['date'] <= timezone.now():
                 raise serializers.ValidationError('Time not available')
+            # Aforo max 26 por hora debido a la pandemia
             if reserves == 26:
                 raise serializers.ValidationError('The capacity at this time is full.')
             else:
@@ -67,10 +67,8 @@ class CreateTrainingReserveSerializer(serializers.Serializer):
         user = User.objects.get(
             identification_number=validated_data.pop('identification_number')
         )
-        profile = user.profile
         reserve = TrainingReserve.objects.create(
             user=user,
-            profile=profile,
             date=validated_data['date']
         )
         return reserve

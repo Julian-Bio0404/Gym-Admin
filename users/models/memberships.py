@@ -14,7 +14,6 @@ class Membership(GymModel):
     This has a duration of 30 days."""
     
     user = models.ForeignKey('users.User', on_delete=models.CASCADE)
-    profile = models.ForeignKey('users.Profile', on_delete=models.CASCADE)
 
     category = models.CharField(
         max_length=1,

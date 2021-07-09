@@ -17,7 +17,6 @@ class MembershipModelSerializer(serializers.ModelSerializer):
     """Membership model serializer."""
 
     user = UserModelSerializer(read_only=True)
-    profile = ProfileModelSerializer(read_only=True)
 
     class Meta:
         """Meta class."""
@@ -25,8 +24,7 @@ class MembershipModelSerializer(serializers.ModelSerializer):
         model = Membership
         fields = ('__all__')
         read_only_fields = [
-            'user', 'profile', 
-            'available_days'
+            'user', 'available_days'
         ]
 
     
@@ -60,23 +58,21 @@ class CreateMembershipSerializer(serializers.Serializer):
         # Membership
         try:
             membership = Membership.objects.get(user=user)
-        except:
-            profile = user.profile
-            profile.is_active = False
+            if membership:
+                raise serializers.ValidationError('The user already has a membership.')
+        except Membership.DoesNotExist:
             return data
-        if membership:
-            raise serializers.ValidationError('The user already has a membership.')
 
     def create(self, data):
         """"Create a membership."""
         user = User.objects.get(
             identification_number=data.pop('identification_number')
         )
-        profile = user.profile
-        profile.is_active = True
         membership = Membership.objects.create(
             user=user, 
-            profile=profile, 
             category=data['category']
         )
+        profile = user.profile
+        profile.is_active = True
+        profile.save()
         return membership

@@ -12,7 +12,6 @@ class ProfileModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         """Meta class."""
-
         model = Profile
         fields = (
             'picture',
@@ -21,3 +20,4 @@ class ProfileModelSerializer(serializers.ModelSerializer):
             'height',
             'is_active'
         )
+        read_only_fields = ['is_active']

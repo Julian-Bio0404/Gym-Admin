@@ -11,11 +11,10 @@ from .views import TrainingReserveViewSet, AppointmentViewSet
 
 
 router = DefaultRouter()
-router2 = DefaultRouter()
 router.register(r'reserves', TrainingReserveViewSet, basename='reserves')
-router2.register(r'appointments', AppointmentViewSet, basename='appointments')
+router.register(r'appointments', AppointmentViewSet, basename='appointments')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('', include(router2.urls))
+    path('', include(router.urls))
 ]

@@ -93,23 +93,15 @@ class UserViewSet(mixins.RetrieveModelMixin,
         user = self.get_object()
         profile = user.profile
         partial = request.method == 'PATCH'
-        try:
-            membership = Membership.objects.get(profile=profile)
-            if membership:
-                profile.is_active = True
-                serializer = ProfileModelSerializer(
-                    profile,
-                    data=request.data,
-                    partial=partial
-                )
-                serializer.is_valid(raise_exception=True)
-                serializer.save()
-                data = UserModelSerializer(user).data
-                return Response(data)
-        except:
-            profile.is_active = False
-            data = UserModelSerializer(user).data
-            return Response(data)
+        serializer = ProfileModelSerializer(
+            profile,
+            data=request.data,
+            partial=partial
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        data = UserModelSerializer(user).data
+        return Response(data)
     
     @action(detail=True, methods=['post'])
     def membership(self, request, *args, **kwargs):
@@ -120,6 +112,5 @@ class UserViewSet(mixins.RetrieveModelMixin,
         serializer.is_valid(raise_exception=True)
         membership = serializer.save()
         data = MembershipModelSerializer(membership).data
-        data.pop('profile')
         return Response(data, status=status.HTTP_201_CREATED)
         
