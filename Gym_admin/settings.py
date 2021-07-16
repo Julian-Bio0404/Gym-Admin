@@ -44,6 +44,7 @@ DJANGO_APPS = [
 LOCAL_APPS = [
     'users',
     'bookings',
+    'taskapp'
 ]
 
 THIRD_PARTY_APPS = [
@@ -154,3 +155,11 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 3,
 }
 
+# Celery
+timezone = TIME_ZONE
+broker_url = 'amqp://guest:admin1234@localhost:5672/django'
+accept_content = ['json']
+task_serializer = 'json'
+result_serializer = 'json'
+task_time_limit = 5 * 60
+task_soft_time_limit = 60

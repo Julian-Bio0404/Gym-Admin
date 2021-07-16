@@ -10,7 +10,7 @@ from rest_framework import serializers
 from users.models import Membership, User
 
 # Serializers
-from users.serializers import UserModelSerializer, ProfileModelSerializer
+from users.serializers import UserModelSerializer
 
 
 class MembershipModelSerializer(serializers.ModelSerializer):
@@ -43,11 +43,12 @@ class CreateMembershipSerializer(serializers.Serializer):
         and if it has a membership."""
 
         # User
-        user = User.objects.get(
-            identification_number=data['identification_number'],
-            is_verified=True
-        )
-        if not user:
+        try:
+            user = User.objects.get(
+                identification_number=data['identification_number'],
+                is_verified=True
+            )
+        except User.DoesNotExist:
             raise serializers.ValidationError('The user does not exist or is not verified.')
 
         # category

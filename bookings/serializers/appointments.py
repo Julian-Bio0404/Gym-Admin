@@ -19,14 +19,13 @@ class AppointmentModelSerializer(serializers.ModelSerializer):
     """Appointment model serializer."""
 
     user = UserModelSerializer(read_only=True)
-    profile = ProfileModelSerializer(read_only=True)
     physio = UserModelSerializer(read_only=True)
 
     class Meta:
         """Meta class."""
         model = Appointment
         fields = ('__all__')
-        read_only_fields = ['user', 'profile']
+        read_only_fields = ['user']
 
 
 class CreateAppointmentSerializer(serializers.Serializer):
@@ -78,14 +77,12 @@ class CreateAppointmentSerializer(serializers.Serializer):
         user = User.objects.get(
             identification_number=data.pop('identification_number')
         )
-        profile = user.profile
         physio = User.objects.get(
             username=data.pop('physio'),
             rol='physio'
         )
         appointment = Appointment.objects.create(
             user=user,
-            profile=profile,
             physio=physio,
             date=data['date']
         )

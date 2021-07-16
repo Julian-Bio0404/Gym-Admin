@@ -26,7 +26,8 @@ from users.serializers import (
 from users.models import User
 
 
-class UserViewSet(mixins.RetrieveModelMixin,
+class UserViewSet(mixins.ListModelMixin,
+                mixins.RetrieveModelMixin,
                 mixins.UpdateModelMixin,
                 viewsets.GenericViewSet):
     """User view set.
