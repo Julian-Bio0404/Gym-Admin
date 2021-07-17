@@ -9,10 +9,11 @@ from django.template.loader import render_to_string
 from django.utils import timezone
 
 # Celery
-from .celery import app
+from celery import shared_task
 
 # Models
-from users.models import User
+from users.models import Membership, User
+from bookings.models import *
 
 # Utilities
 from datetime import timedelta
@@ -33,7 +34,7 @@ def gen_verification_token(user):
     return token
 
 
-@app.task(name='send_confirmation_email')
+@shared_task # Asynch task
 def send_confirmation_email(user_pk):
     """Send account verification link to given user."""
     user = User.objects.get(pk=user_pk)
@@ -47,4 +48,42 @@ def send_confirmation_email(user_pk):
     msg = EmailMultiAlternatives(subject, content, from_email, [user.email])
     msg.attach_alternative(content, 'text/html')
     msg.send()
+
+
+#----------------------------Memberships-------------------------------------
+@shared_task # Periodic task
+def finalize_memberships():
+    """Discounts one day from memberships each 
+       day and remove them after 30 days."""
+    memberships = Membership.objects.all()
+    for membership in memberships:
+        membership.available_days -= 1
+        membership.save()
+        if membership.available_days == 0:
+            membership.delete()
+            profile = membership.user.profile
+            profile.is_active = False
+            profile.save()
+
+
+#----------------------------TrainingReserve----------------------------------
+@shared_task # Periodic task
+def remove_training_reserves():
+    """Delete the reservation if it is already expired."""
+    reserves = TrainingReserve.objects.all()
+    now = timezone.now()
+    for reserve in reserves:
+        if reserve.date < now:
+            reserve.delete()
+
+
+#-----------------------------Appointments-------------------------------------
+@shared_task # Periodic task
+def remove_appointments():
+    """"Delete the appointment if it is already expired."""
+    appointments = Appointment.objects.all()
+    now = timezone.now()
+    for appointment in appointments:
+        if appointment.date < now:
+            appointment.delete()
 

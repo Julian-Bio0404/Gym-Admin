@@ -12,7 +12,7 @@ from users.models import User
 from bookings.models import Appointment
 
 # Serializers
-from users.serializers import UserModelSerializer, ProfileModelSerializer
+from users.serializers import UserModelSerializer
 
 
 class AppointmentModelSerializer(serializers.ModelSerializer):

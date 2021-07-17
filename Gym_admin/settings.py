@@ -48,9 +48,10 @@ LOCAL_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    "rest_framework",
-    "rest_framework.authtoken",
-    "django_filters",
+    'rest_framework',
+    'rest_framework.authtoken',
+    'django_filters',
+    'django_celery_beat'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -161,5 +162,3 @@ broker_url = 'amqp://guest:admin1234@localhost:5672/django'
 accept_content = ['json']
 task_serializer = 'json'
 result_serializer = 'json'
-task_time_limit = 5 * 60
-task_soft_time_limit = 60
