@@ -1,0 +1,3381 @@
+{
+	"info": {
+		"_postman_id": "2ae6c297-cb32-4f86-b20e-d2c165adde6c",
+		"name": "Gym-Admin",
+		"description": "# Descripcion\n\nREST API de Gym-Admin. Una aplicacion que permite crear cuentas de usuarios de un gimnasio, crear membresias y hacer reservas para entrenamientos y citas con fisioterapeutas.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Users signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"fulanito@gmail.com\",\r\n    \"username\": \"fulanito08\",\r\n    \"type_identification\": \"CC\",\r\n    \"identification_number\": \"1076290316\",\r\n    \"phone_number\": \"+573118904263\",\r\n    \"rol\": \"client\",\r\n    \"password\": \"fulanito123\",\r\n    \"password_confirmation\": \"fulanito123\",\r\n    \"first_name\": \"Fulanito\",\r\n    \"last_name\": \"Fulanez\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/signup/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"signup",
+								""
+							]
+						},
+						"description": "# Descripcion de Users signup\n\n**Methods:** \n- POST\n\n**Request:**\n- `email` `String` correo electronico\n- `username` `String` especifica el username\n- `phone_number` `String` numero telefonico\n- `type_identification` `String` tipo de doc.Identidad TI o CC\n- `identification_number` `String` numero de identificacion\n- `rol` `String` especifica el rol. client, admin, trainer o physio (default=client)\n- `password` `String` contraseña\n- `password_confirmation` `String` confirma la contraseña\n- `first_name` `Sting` primer nombre\n- `last_name` `String` apellido"
+					},
+					"response": [
+						{
+							"name": "Signup success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"fulanito@gmail.com\",\r\n    \"username\": \"fulanito08\",\r\n    \"type_identification\": \"CC\",\r\n    \"identification_number\": \"1076290316\",\r\n    \"phone_number\": \"+573118904263\",\r\n    \"rol\": \"client\",\r\n    \"password\": \"fulanito123\",\r\n    \"password_confirmation\": \"fulanito123\",\r\n    \"first_name\": \"Fulanito\",\r\n    \"last_name\": \"Fulanez\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/signup/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"signup",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 17:39:59 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "290"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"fulanito08\",\n    \"first_name\": \"Fulanito\",\n    \"last_name\": \"Fulanez\",\n    \"email\": \"fulanito@gmail.com\",\n    \"phone_number\": \"+573118904263\",\n    \"rol\": \"client\",\n    \"type_identification\": \"CC\",\n    \"identification_number\": \"1076290316\",\n    \"profile\": {\n        \"picture\": null,\n        \"age\": null,\n        \"weight\": 0,\n        \"height\": 0,\n        \"is_active\": false\n    }\n}"
+						},
+						{
+							"name": "Signup failed (email already exists)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"fulanito@gmail.com\",\r\n    \"username\": \"fulanito08\",\r\n    \"type_identification\": \"CC\",\r\n    \"identification_number\": \"1076290316\",\r\n    \"phone_number\": \"+573118904263\",\r\n    \"rol\": \"client\",\r\n    \"password\": \"fulanito123\",\r\n    \"password_confirmation\": \"fulanito123\",\r\n    \"first_name\": \"Fulanito\",\r\n    \"last_name\": \"Fulanez\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/signup/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"signup",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 17:55:42 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "137"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": [\n        \"This field must be unique.\"\n    ],\n    \"username\": [\n        \"This field must be unique.\"\n    ],\n    \"identification_number\": [\n        \"This field must be unique.\"\n    ]\n}"
+						},
+						{
+							"name": "Signup failed (a field is missing)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"fulanito@gmail.com\",\r\n    \"username\": \"fulanito08\",\r\n    \"type_identification\": \"CC\",\r\n    \"phone_number\": \"+573118904263\",\r\n    \"rol\": \"client\",\r\n    \"password\": \"fulanito123\",\r\n    \"password_confirmation\": \"fulanito123\",\r\n    \"first_name\": \"Fulanito\",\r\n    \"last_name\": \"Fulanez\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/signup/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"signup",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 18:00:45 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"identification_number\": [\n        \"This field is required.\"\n    ]\n}"
+						},
+						{
+							"name": "Signup failed (password don´t match)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"fulanito@gmail.com\",\r\n    \"username\": \"fulanito08\",\r\n    \"type_identification\": \"CC\",\r\n    \"identification_number\": \"1076290316\",\r\n    \"phone_number\": \"+573118904263\",\r\n    \"rol\": \"client\",\r\n    \"password\": \"fulanito123\",\r\n    \"password_confirmation\": \"fulanito124\",\r\n    \"first_name\": \"Fulanito\",\r\n    \"last_name\": \"Fulanez\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/signup/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"signup",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 18:02:27 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"non_field_errors\": [\n        \"Password don´t match\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Users verify account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \" eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiZnVsYW5pdG8wOCIsImV4cCI6MTYyNjU0NTA1NiwidHlwZSI6ImVtYWlsX2NvbmZpcm1hdGlvbiJ9.XV0449K2P7fBTG3DDDaxR9pC6gogIsb0aiesmEzfWOI\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/verify/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"verify",
+								""
+							]
+						},
+						"description": "# Descripcion de Users verify account\n\n**Methods:**\n- POST\n\n**Request:**\n- `token` `String` token impreso en consola al hacer sign-up"
+					},
+					"response": [
+						{
+							"name": "Verify account success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"token\": \" eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiZnVsYW5pdG8wOCIsImV4cCI6MTYyNjU0NTA1NiwidHlwZSI6ImVtYWlsX2NvbmZpcm1hdGlvbiJ9.XV0449K2P7fBTG3DDDaxR9pC6gogIsb0aiesmEzfWOI\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/verify/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"verify",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 18:34:48 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "81"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Congratulation! Now choose a membership and start training with us.\"\n}"
+						},
+						{
+							"name": "Verify account failed (link has expired)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiQ2FtaWxvSGVybWlkYSIsImV4cCI6MTYyNjA0MDc0NiwidHlwZSI6ImVtYWlsX2NvbmZpcm1hdGlvbiJ9.k-thbsazM4cWghQseFVBtp7Fo07i2_sFbCAQMvBHG2g\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/verify/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"verify",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 18:33:09 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": [\n        \"Verification link has expired.\"\n    ]\n}"
+						},
+						{
+							"name": "Verify account failed (Invalid token)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"token\": \" eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiZnVsYW5pdG8wOCIsImV4cCI6MTYyNjU0NTA1NiwidHlwZSI6ImVtYWlsX2NvbmZpcm1hdGlvbiJ9.XV0449K2P7fBTG3DDDaxR9pC6gogIhbhsxdcfhgjk\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/verify/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"verify",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 18:36:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": [\n        \"Invalid token\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Users login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"fulanito@gmail.com\",\r\n    \"password\": \"fulanito1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/login/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"login",
+								""
+							]
+						},
+						"description": "# Descripcion de Users Login\n\n**Methods:**\n- POST\n\n**Request:**\n- `email` `String` correo electronico del usuario\n- `password` `String` contraseña del usuario"
+					},
+					"response": [
+						{
+							"name": "Login success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"fulanito@gmail.com\",\r\n    \"password\": \"fulanito123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/login/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 18:47:23 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "357"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"username\": \"fulanito08\",\n        \"first_name\": \"Fulanito\",\n        \"last_name\": \"Fulanez\",\n        \"email\": \"fulanito@gmail.com\",\n        \"phone_number\": \"+573118904263\",\n        \"rol\": \"client\",\n        \"type_identification\": \"CC\",\n        \"identification_number\": \"1076290316\",\n        \"profile\": {\n            \"picture\": null,\n            \"age\": null,\n            \"weight\": 0,\n            \"height\": 0,\n            \"is_active\": false\n        }\n    },\n    \"access_token\": \"413d0e208808e50d22c08d0eac0be5af5c87abb0\"\n}"
+						},
+						{
+							"name": "Login failed (invalid credentials)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"fulanito@gmail.com\",\r\n    \"password\": \"fulanito124\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/login/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"login",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 18:55:41 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"non_field_errors\": [\n        \"Invalid credentials\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "User detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/users/fulanito08/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"fulanito08",
+								""
+							]
+						},
+						"description": "# Descripcion User detail\nEl endpoint debe ser el username de un usuario existente. \n\n**Methods:**\n- GET\n\n**Permisos:**\n- Cualquier usuario autenticado puede acceder al detalle de si mismo, como de otro usuario."
+					},
+					"response": [
+						{
+							"name": "Detail success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/users/fulanito08/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"fulanito08",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 19:00:40 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "290"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"fulanito08\",\n    \"first_name\": \"Fulanito\",\n    \"last_name\": \"Fulanez\",\n    \"email\": \"fulanito@gmail.com\",\n    \"phone_number\": \"+573118904263\",\n    \"rol\": \"client\",\n    \"type_identification\": \"CC\",\n    \"identification_number\": \"1076290316\",\n    \"profile\": {\n        \"picture\": null,\n        \"age\": null,\n        \"weight\": 0,\n        \"height\": 0,\n        \"is_active\": false\n    }\n}"
+						},
+						{
+							"name": "Detail failed (not found)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/users/fulanito0/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"fulanito0",
+										""
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 18:59:01 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "23"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Not found.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "User partial update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identification_number\": 1075297523\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/fulanito08/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"fulanito08",
+								""
+							]
+						},
+						"description": "# Descripcion de User partial update\n\n**Methods:**\n- PUT\n- PATCH\n\n**Request:** uno o todos los campos que desea actualizar:\n- `identification_number` `String` numero de identificacion del usuario\n\n**Permisos:**\n- Acceso solo al dueño de la cuenta"
+					},
+					"response": [
+						{
+							"name": "Partial update success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identification_number\": 1075297523\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/fulanito08/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"fulanito08",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 19:18:58 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "290"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"fulanito08\",\n    \"first_name\": \"Fulanito\",\n    \"last_name\": \"Fulanez\",\n    \"email\": \"fulanito@gmail.com\",\n    \"phone_number\": \"+573118904263\",\n    \"rol\": \"client\",\n    \"type_identification\": \"CC\",\n    \"identification_number\": \"1076290316\",\n    \"profile\": {\n        \"picture\": null,\n        \"age\": null,\n        \"weight\": 0,\n        \"height\": 0,\n        \"is_active\": false\n    }\n}"
+						},
+						{
+							"name": "Partial update failded (you do not have permission)",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identification_number\": 1075297523\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/fulanito05/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"fulanito05",
+										""
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 19:12:38 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"You do not have permission to perform this action.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "User password update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"old_password\": \"fulanito123\",\r\n    \"password\": \"fulanito124\",\r\n    \"password_confirmation\": \"fulanito126\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/fulanito08/change_password/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"fulanito08",
+								"change_password",
+								""
+							]
+						},
+						"description": "# Descripcion de User password update\n\n**Methods:**\n- PUT\n\n**Request:** \n- `old_password` `String` contraseña antigua del usuario\n- `password` `String` nueva contraseña\n- `password_confirmation` confirmacion de la nueva contraseña\n\n**Permisos:**\n- Acceso solo al dueño de la cuenta"
+					},
+					"response": [
+						{
+							"name": "Password update success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"old_password\": \"fulanito123\",\r\n    \"password\": \"fulanito1234\",\r\n    \"password_confirmation\": \"fulanito1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/fulanito08/change_password/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"fulanito08",
+										"change_password",
+										""
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 19:41:56 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Allow",
+									"value": "PUT, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Password update (wrong password)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"old_password\": \"fulanito\",\r\n    \"password\": \"fulanito1234\",\r\n    \"password_confirmation\": \"fulanito1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/fulanito08/change_password/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"fulanito08",
+										"change_password",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 19:43:30 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "PUT, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"non_field_errors\": [\n        \"Wrong password.\"\n    ]\n}"
+						},
+						{
+							"name": "Password update (password don´t match)",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"old_password\": \"fulanito123\",\r\n    \"password\": \"fulanito124\",\r\n    \"password_confirmation\": \"fulanito126\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/fulanito08/change_password/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"fulanito08",
+										"change_password",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 19:45:26 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "PUT, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"non_field_errors\": [\n        \"Password don´t match\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "User partial update profile",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"age\": \"25\",\r\n    \"weight\": 59.8,\r\n    \"height\": 169\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/fulanito08/profile/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"fulanito08",
+								"profile",
+								""
+							]
+						},
+						"description": "# Descripcion de User partial update profile\n\n**Methods:**\n- PUT\n- PATCH\n\n**Request:**\n- `picture` `Image`\n- `age` `Int` edad\n- `weight` `Float` peso en Kg\n- `height` `Int` altura en cm\n\n**Permisos**\n- Acceso solo al dueño de la cuenta"
+					},
+					"response": [
+						{
+							"name": "Partial update profile success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"age\": \"25\",\r\n    \"weight\": 59.8,\r\n    \"height\": 169\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/fulanito08/profile/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"fulanito08",
+										"profile",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 20:13:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "PUT, PATCH, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "291"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"fulanito08\",\n    \"first_name\": \"Fulanito\",\n    \"last_name\": \"Fulanez\",\n    \"email\": \"fulanito@gmail.com\",\n    \"phone_number\": \"+573118904263\",\n    \"rol\": \"client\",\n    \"type_identification\": \"CC\",\n    \"identification_number\": \"1076290316\",\n    \"profile\": {\n        \"picture\": null,\n        \"age\": 25,\n        \"weight\": 59.8,\n        \"height\": 169,\n        \"is_active\": false\n    }\n}"
+						},
+						{
+							"name": "Partial update profile failed (integer is required)",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"age\": \"25\",\r\n    \"weight\": 59.8,\r\n    \"height\": 169.2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/fulanito08/profile/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"fulanito08",
+										"profile",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 20:14:19 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "PUT, PATCH, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"height\": [\n        \"A valid integer is required.\"\n    ]\n}"
+						},
+						{
+							"name": "Partial update profile failed (you do not have permission)",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"age\": \"25\",\r\n    \"weight\": 59.8,\r\n    \"height\": 169\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/AndreGym/profile/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"AndreGym",
+										"profile",
+										""
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 20:16:10 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "PUT, PATCH, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"You do not have permission to perform this action.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "User membership",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\": \"C\",\r\n    \"identification_number\": \"1075297523\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/fulanito08/membership/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"fulanito08",
+								"membership",
+								""
+							]
+						},
+						"description": "# Descripcion User membership\n\n**Methods:**\n- POST\n\n**Request:**\n- `category` `String` categoria de la membresia. A, B, C o P (default=p)\n- `identification_number` `String` numero de identificacion del usuario\n\n**Permisos:**\n- Solo los usuarios con rol de admin pueden crear membresias a los demas usuarios"
+					},
+					"response": [
+						{
+							"name": "Membership success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"category\": \"C\",\r\n    \"identification_number\": \"1076290316\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/fulanito08/membership/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"fulanito08",
+										"membership",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 20:24:34 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "432"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 6,\n    \"user\": {\n        \"username\": \"fulanito08\",\n        \"first_name\": \"Fulanito\",\n        \"last_name\": \"Fulanez\",\n        \"email\": \"fulanito@gmail.com\",\n        \"phone_number\": \"+573118904263\",\n        \"rol\": \"client\",\n        \"type_identification\": \"CC\",\n        \"identification_number\": \"1076290316\",\n        \"profile\": {\n            \"picture\": null,\n            \"age\": 25,\n            \"weight\": 59.8,\n            \"height\": 169,\n            \"is_active\": true\n        }\n    },\n    \"created\": \"2021-07-14T15:24:34.650222-05:00\",\n    \"modified\": \"2021-07-14T15:24:34.650222-05:00\",\n    \"category\": \"C\",\n    \"available_days\": 30\n}"
+						},
+						{
+							"name": "Membership failed (category not allowed)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"category\": \"D\",\r\n    \"identification_number\": \"1076290316\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/fulanito08/membership/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"fulanito08",
+										"membership",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 20:26:11 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"non_field_errors\": [\n        \"Category not allowed.\"\n    ]\n}"
+						},
+						{
+							"name": "Membership failed (user does not exist or is not verified)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"category\": \"A\",\r\n    \"identification_number\": \"1076290320\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/fulanito08/membership/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"fulanito08",
+										"membership",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 20:32:58 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"non_field_errors\": [\n        \"The user does not exist or is not verified.\"\n    ]\n}"
+						},
+						{
+							"name": "Membership failed (user already has a membership)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"category\": \"A\",\r\n    \"identification_number\": \"1076290316\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/fulanito08/membership/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"fulanito08",
+										"membership",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 20:34:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "59"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"non_field_errors\": [\n        \"The user already has a membership.\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "User List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						},
+						"description": "# Descripcion User list\n\n**Methods:**\n- GET\n\n**Permisos:**\n- Acceso solo a usuarios autenticados"
+					},
+					"response": [
+						{
+							"name": "List success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 21:12:13 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "973"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 5,\n    \"next\": \"http://localhost:8000/users/?limit=3&offset=3\",\n    \"previous\": null,\n    \"results\": [\n        {\n            \"username\": \"fulanito08\",\n            \"first_name\": \"Fulanito\",\n            \"last_name\": \"Fulanez\",\n            \"email\": \"fulanito@gmail.com\",\n            \"phone_number\": \"+573118904263\",\n            \"rol\": \"client\",\n            \"type_identification\": \"CC\",\n            \"identification_number\": \"1076290316\",\n            \"profile\": {\n                \"picture\": null,\n                \"age\": 25,\n                \"weight\": 59.8,\n                \"height\": 169,\n                \"is_active\": true\n            }\n        },\n        {\n            \"username\": \"NataliaApache\",\n            \"first_name\": \"Natalia\",\n            \"last_name\": \"Apache\",\n            \"email\": \"natalia@gmail.com\",\n            \"phone_number\": \"+573116033693\",\n            \"rol\": \"physio\",\n            \"type_identification\": \"CC\",\n            \"identification_number\": \"1075297540\",\n            \"profile\": {\n                \"picture\": null,\n                \"age\": null,\n                \"weight\": 0,\n                \"height\": 0,\n                \"is_active\": false\n            }\n        },\n        {\n            \"username\": \"CamiloHermida\",\n            \"first_name\": \"Camilo\",\n            \"last_name\": \"Hermida\",\n            \"email\": \"camilohermida@gmail.com\",\n            \"phone_number\": \"+573116033693\",\n            \"rol\": \"client\",\n            \"type_identification\": \"CC\",\n            \"identification_number\": \"1075297523\",\n            \"profile\": {\n                \"picture\": null,\n                \"age\": 25,\n                \"weight\": 60,\n                \"height\": 169,\n                \"is_active\": true\n            }\n        }\n    ]\n}"
+						},
+						{
+							"name": "List failed (Authentication were not provided)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/users/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 21:13:25 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "WWW-Authenticate",
+									"value": "Token"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Authentication credentials were not provided.\"\n}"
+						}
+					]
+				}
+			],
+			"description": "# Descripcion\n\nAqui se alojan todos los endpoints de usuarios. Para algunas acciones debe estar autenticado."
+		},
+		{
+			"name": "Booking",
+			"item": [
+				{
+					"name": "Create reserve",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identification_number\": \"1076290316\",\r\n    \"date\": \"2021-07-14T19:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/reserves/reserve/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reserves",
+								"reserve",
+								""
+							]
+						},
+						"description": "# Descripcion Create reserve\nReservas de entrenamiento limite 26, simulando un aforo limite por la pandemia.\n\n**Methods:**\n- POST\n\n**Request:**\n- `identification_number` `String` numero del doc.Identificacion del usuario. Debe contar con una membresia activa\n- `date` `Datetime` fecha de la reserva\n\n**Permisos:**\n- Acceso solo al dueño de la cuenta"
+					},
+					"response": [
+						{
+							"name": "Create reserve success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identification_number\": \"1076290316\",\r\n    \"date\": \"2021-07-14T19:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/reserves/reserve/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reserves",
+										"reserve",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 21:19:53 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, DELETE, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "432"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"user\": {\n        \"username\": \"fulanito08\",\n        \"first_name\": \"Fulanito\",\n        \"last_name\": \"Fulanez\",\n        \"email\": \"fulanito@gmail.com\",\n        \"phone_number\": \"+573118904263\",\n        \"rol\": \"client\",\n        \"type_identification\": \"CC\",\n        \"identification_number\": \"1076290316\",\n        \"profile\": {\n            \"picture\": null,\n            \"age\": 25,\n            \"weight\": 59.8,\n            \"height\": 169,\n            \"is_active\": true\n        }\n    },\n    \"created\": \"2021-07-14T16:19:53.525160-05:00\",\n    \"modified\": \"2021-07-14T16:19:53.525160-05:00\",\n    \"date\": \"2021-07-14T19:00:00-05:00\"\n}"
+						},
+						{
+							"name": "create reserve failed (you do not have permission)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identification_number\": \"1076290316\",\r\n    \"date\": \"2021-07-14T19:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/reserves/reserve/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reserves",
+										"reserve",
+										""
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 21:17:55 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, DELETE, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"You do not have permission to perform this action.\"\n}"
+						},
+						{
+							"name": "Create reserve failed (you already have a reserve)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identification_number\": \"1076290316\",\r\n    \"date\": \"2021-07-14T19:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/reserves/reserve/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reserves",
+										"reserve",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 21:20:54 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, DELETE, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"non_field_errors\": [\n        \"You already have a reserve.\"\n    ]\n}"
+						},
+						{
+							"name": "Create reserve failed (time not available)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identification_number\": \"1076290316\",\r\n    \"date\": \"2021-07-14T14:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/reserves/reserve/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reserves",
+										"reserve",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 21:22:54 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, DELETE, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"non_field_errors\": [\n        \"Time not available\"\n    ]\n}"
+						},
+						{
+							"name": "Create reserve failed (does not have an active membership)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identification_number\": \"1075297432\",\r\n    \"date\": \"2021-07-14T19:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/reserves/reserve/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reserves",
+										"reserve",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 22:35:50 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, DELETE, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"non_field_errors\": [\n        \"The user does not have an active membership.\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "List reserves",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identification_number\": \"1076290316\",\r\n    \"date\": \"2021-07-14T19:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/reserves/reserve/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reserves",
+								"reserve",
+								""
+							]
+						},
+						"description": "# Descripcion List reserve\n\n**Methods:**\n- GET\n\n**Request:**\n- `identification_number` `String`\n- `date` `Datetime`\n\n**Permisos:**\n- Acceso solo a los usuarios con rol de admin"
+					},
+					"response": []
+				},
+				{
+					"name": "Detail reserve",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/reserves/fulanito08/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reserves",
+								"fulanito08",
+								""
+							]
+						},
+						"description": "# Descripcion de Detail reserve\nDebe contar con una membresia activa.\n\n**Methods:**\n- GET\n\n**Permisos:**\n- Acceso solo al dueño de la cuenta"
+					},
+					"response": [
+						{
+							"name": "Detail reserve success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/reserves/fulanito08/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reserves",
+										"fulanito08",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 21:32:41 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "432"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"user\": {\n        \"username\": \"fulanito08\",\n        \"first_name\": \"Fulanito\",\n        \"last_name\": \"Fulanez\",\n        \"email\": \"fulanito@gmail.com\",\n        \"phone_number\": \"+573118904263\",\n        \"rol\": \"client\",\n        \"type_identification\": \"CC\",\n        \"identification_number\": \"1076290316\",\n        \"profile\": {\n            \"picture\": null,\n            \"age\": 25,\n            \"weight\": 59.8,\n            \"height\": 169,\n            \"is_active\": true\n        }\n    },\n    \"created\": \"2021-07-14T16:25:02.092059-05:00\",\n    \"modified\": \"2021-07-14T16:25:02.092059-05:00\",\n    \"date\": \"2021-07-14T19:00:00-05:00\"\n}"
+						},
+						{
+							"name": "Detail reserve (Authentication were not provided)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/reserves/fulanito08/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reserves",
+										"fulanito08",
+										""
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 21:37:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "WWW-Authenticate",
+									"value": "Token"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Authentication credentials were not provided.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete reserve",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/reserves/fulanito08/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reserves",
+								"fulanito08",
+								""
+							]
+						},
+						"description": "# Descripcion de Delete reserve\n\n**Methods:**\n- DELETE\n\n**Permisos:**\n- Acceso solo al dueño de la cuenta"
+					},
+					"response": [
+						{
+							"name": "Delete reserve success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/reserves/fulanito08/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reserves",
+										"fulanito08",
+										""
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 21:41:27 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Delete reserve failed (not found)",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/reserves/fulanito0/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reserves",
+										"fulanito0",
+										""
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 21:45:40 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "23"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Not found.\"\n}"
+						},
+						{
+							"name": "Delete reserve failed (you do not have permission)",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/reserves/fulanito08/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reserves",
+										"fulanito08",
+										""
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 21:48:39 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"You do not have permission to perform this action.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create appointment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identification_number\": \"1076290316\",\r\n    \"physio\": \"NataliaApache\",\r\n    \"date\": \"2021-07-20T18:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/appointments/reserve_appointment/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"reserve_appointment",
+								""
+							]
+						},
+						"description": "# Descripcion Create appointment\nDebe contar con una membresia activa.\n\n**Methods:**\n- POST\n\n**Request:**\n- `identification_number` `String` numero de identificacion del usuario\n- `physio` `String` username del fisioterapeuta. Este debe existir con tal rol\n- `date` `Datetime` fecha de la cita medica\n\n**Permisos:**\n- Acceso solo al dueño de la cuenta"
+					},
+					"response": [
+						{
+							"name": "Create appointment success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identification_number\": \"1076290316\",\r\n    \"physio\": \"NataliaApache\",\r\n    \"date\": \"2021-07-20T18:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/reserve_appointment/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"reserve_appointment",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 22:22:15 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "732"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"user\": {\n        \"username\": \"fulanito08\",\n        \"first_name\": \"Fulanito\",\n        \"last_name\": \"Fulanez\",\n        \"email\": \"fulanito@gmail.com\",\n        \"phone_number\": \"+573118904263\",\n        \"rol\": \"client\",\n        \"type_identification\": \"CC\",\n        \"identification_number\": \"1076290316\",\n        \"profile\": {\n            \"picture\": null,\n            \"age\": 25,\n            \"weight\": 59.8,\n            \"height\": 169,\n            \"is_active\": true\n        }\n    },\n    \"physio\": {\n        \"username\": \"NataliaApache\",\n        \"first_name\": \"Natalia\",\n        \"last_name\": \"Apache\",\n        \"email\": \"natalia@gmail.com\",\n        \"phone_number\": \"+573116033693\",\n        \"rol\": \"physio\",\n        \"type_identification\": \"CC\",\n        \"identification_number\": \"1075297540\",\n        \"profile\": {\n            \"picture\": null,\n            \"age\": null,\n            \"weight\": 0,\n            \"height\": 0,\n            \"is_active\": false\n        }\n    },\n    \"created\": \"2021-07-14T17:22:15.467819-05:00\",\n    \"modified\": \"2021-07-14T17:22:15.467819-05:00\",\n    \"date\": \"2021-07-20T18:00:00-05:00\"\n}"
+						},
+						{
+							"name": "Create appointment failed (you do not have permission)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identification_number\": \"1076290316\",\r\n    \"physio\": \"dianapachon\",\r\n    \"date\": \"2021-07-20T18:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/reserve_appointment/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"reserve_appointment",
+										""
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 22:10:57 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"You do not have permission to perform this action.\"\n}"
+						},
+						{
+							"name": "Create appointment failed (the physio does not exist)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identification_number\": \"1076290316\",\r\n    \"physio\": \"fulanito08\",\r\n    \"date\": \"2021-07-20T18:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/reserve_appointment/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"reserve_appointment",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 22:24:59 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"physio\": [\n        \"The physio does not exist\"\n    ]\n}"
+						},
+						{
+							"name": "Create appointment failed (you already have an appointment)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identification_number\": \"1076290316\",\r\n    \"physio\": \"NataliaApache\",\r\n    \"date\": \"2021-07-20T18:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/reserve_appointment/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"reserve_appointment",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 22:26:01 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"non_field_errors\": [\n        \"You already have an appointment.\"\n    ]\n}"
+						},
+						{
+							"name": "Create appointment failed (time not available)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identification_number\": \"1076290316\",\r\n    \"physio\": \"NataliaApache\",\r\n    \"date\": \"2021-07-10T18:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/reserve_appointment/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"reserve_appointment",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 22:27:54 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"non_field_errors\": [\n        \"Time not available.\"\n    ]\n}"
+						},
+						{
+							"name": "Create appointment failed (does not have an active membership)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identification_number\": \"1075297432\",\r\n    \"physio\": \"NataliaApache\",\r\n    \"date\": \"2021-07-14T18:00:00\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/appointments/reserve_appointment/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"appointments",
+										"reserve_appointment",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jul 2021 22:34:37 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.9.5"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"non_field_errors\": [\n        \"The user does not have an active membership.\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "List appointments for physio",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/appointments/NataliaApache/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								"NataliaApache",
+								""
+							]
+						},
+						"description": "# Descripcion List appointment for physio\n\n**Methods:**\n- GET\n\n**Permisos:**\n- Acceso solo a usuarios con rol de physio"
+					},
+					"response": []
+				},
+				{
+					"name": "List appointments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/appointments/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"appointments",
+								""
+							]
+						},
+						"description": "# Descripcion List appointments\n\n**Methods:**\n- GET\n\n**Permisos:**\n- Acceso solo a usuarios con rol de physio"
+					},
+					"response": []
+				}
+			],
+			"description": "# Descripcion\n\nAqui se alojan todos los endpoints de bookings.\nPara hacer requests, el usuario debe estar autenticado y para ciertas acciones debe tener una membresia activa."
+		}
+	]
+}
