@@ -38,9 +38,10 @@ REST API de Gym-Admin. Una aplicacion que permite crear cuentas de usuarios de u
 #### Para correr el proyecto:
 - Clone este proyecto
 - Cree un ambiente virtual donde alojará el proyecto
-- Diríjase a la raíz del proyecto e instale los requerimientos con pip install -r requirements.txt
-- Instale en su máquina erlang-OPT==23.3 y rabbitmq-server==3.8.19
-- Corra py manage.py runserver 
+- Diríjase a la raíz del proyecto e instale las dependencias con: pip install -r requirements.txt
+- Instale en su máquina: erlang-OPT==23.3 y rabbitmq-server==3.8.19
+- Corra: py manage.py runserver 
+- Corra: 'celery -A taskapp beat' y 'celery -A taskapp worker -l info --concurrency 1 -P solo'. Cada comando en diferente pestaña de consola.
 
 #### Para ver la documentacion de la API REST y ver cómo hacer request a esta, puede:
 - Importar el archivo documentation.postman_collection a su cuenta de Postman, para jugar con ella.
