@@ -1,0 +1,40 @@
+version: "3.9"
+   
+services:
+  rabbitmq:
+    image: rabbitmq:3.9.0-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  django:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment: 
+      - CELERY_BROKER_URL=amqp://rabbitmq
+    depends_on:
+      - rabbitmq
+
+  celeryworker:
+    build: .
+    command: celery -A taskapp worker --loglevel=info
+    volumes:
+        - .:/code
+    ports: []
+    depends_on:
+        - django
+        - rabbitmq
+        
+  celerybeat:
+    build: .
+    command: celery -A taskapp beat
+    volumes:
+        - .:/code
+    ports: []
+    depends_on:
+        - django
+        - rabbitmq

@@ -13,7 +13,6 @@ import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Gym_admin.settings')
 app = Celery(
     'taskapp', 
-    broker='amqp://guest:admin1234@localhost:5672/django',
     include=['taskapp.tasks']
 )
 app.config_from_object('django.conf:settings', namespace='CELERY')

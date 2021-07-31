@@ -33,7 +33,3 @@ sqlparse==0.4.1
 urllib3==1.26.5
 vine==5.0.0
 wcwidth==0.2.5
-
-#--Instalar en su sistema--
-# erlang-OPT==23.3
-# rabbitmq-server==3.8.19

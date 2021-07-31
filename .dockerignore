@@ -1,0 +1,8 @@
+.git
+.gitignore
+celerybeat*
+env/
+__pycache__/
+documentation*
+db.sqlite3
+README.md

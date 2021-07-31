@@ -158,7 +158,7 @@ REST_FRAMEWORK = {
 
 # Celery
 timezone = TIME_ZONE
-broker_url = 'amqp://guest:admin1234@localhost:5672/django'
+CELERY_BROKER_URL='amqp://rabbitmq' 
 accept_content = ['json']
 task_serializer = 'json'
 result_serializer = 'json'
